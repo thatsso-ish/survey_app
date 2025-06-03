@@ -17,10 +17,10 @@ This is a Flask-based web application that allows users to participate in a life
 ## Installation
 1. Ensure you have Python 3.x installed
 2. Clone this repository
-3. Install the required dependencies
-   pip install flask
+3. Install the required dependencies:
+   -pip install flask
 4. Run the application:
-   python app.py
+   -python app.py
 5. Access the application at `http://localhost:5000` in your web browser
 
 ## Usage
