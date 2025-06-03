@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Results</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Survey Results</h1>
+            
+            {% if no_data %}
+            <div class="no-data">
+                <p>No survey data available yet. Be the first to submit a survey!</p>
+            </div>
+            {% else %}
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total number of surveys</td>
+                        <td class="stat-value">{{ total_surveys }}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Age</td>
+                        <td class="stat-value">{{ avg_age }}</td>
+                    </tr>
+                    <tr>
+                        <td>Oldest person who participated in survey</td>
+                        <td class="stat-value">{{ max_age }}</td>
+                    </tr>
+                    <tr>
+                        <td>Youngest person who participated in survey</td>
+                        <td class="stat-value">{{ min_age }}</td>
+                    </tr>
+                    <tr>
+                        <td>Percentage of people who like Pizza</td>
+                        <td class="stat-value">{{ pizza_pct }}%</td>
+                    </tr>
+                    <tr>
+                        <td>Percentage of people who like Pasta</td>
+                        <td class="stat-value">{{ pasta_pct }}%</td>
+                    </tr>
+                    <tr>
+                        <td>Percentage of people who like Pap and Wors</td>
+                        <td class="stat-value">{{ pap_wors_pct }}%</td>
+                    </tr>
+                    <tr>
+                        <td>People who like to watch movies (average rating)</td>
+                        <td class="stat-value">{{ avg_movies }}</td>
+                    </tr>
+                    <tr>
+                        <td>People who like to listen to radio (average rating)</td>
+                        <td class="stat-value">{{ avg_radio }}</td>
+                    </tr>
+                    <tr>
+                        <td>People who like to eat out (average rating)</td>
+                        <td class="stat-value">{{ avg_eat_out }}</td>
+                    </tr>
+                    <tr>
+                        <td>People who like to watch TV (average rating)</td>
+                        <td class="stat-value">{{ avg_tv }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        
+        <div class="nav-links">
+            <a href="{{ url_for('survey') }}" class="nav-link">Fill Out Survey</a>
+            <a href="{{ url_for('results') }}" class="nav-link">Refresh Results</a>
+        </div>
+    </div>
+</body>
+</html>

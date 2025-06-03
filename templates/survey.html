@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lifestyle Survey</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Lifestyle Survey</h1>
+            
+            {% if errors %}
+            <div class="error">
+                <ul>
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <form method="POST">
+                <div class="form-group">
+                    <h2>Personal Details</h2>
+                    <div class="form-group">
+                        <label for="full_name">Full Names:</label>
+                        <input type="text" id="full_name" name="full_name" value="{{ request.form.full_name if request.form }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ request.form.email if request.form }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" value="{{ request.form.dob if request.form }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Number:</label>
+                        <input type="tel" id="contact" name="contact" value="{{ request.form.contact if request.form }}" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h2>What is your favorite food?</h2>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pizza" name="pizza" {% if request.form and request.form.pizza %}checked{% endif %}>
+                            <label for="pizza">Pizza</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pasta" name="pasta" {% if request.form and request.form.pasta %}checked{% endif %}>
+                            <label for="pasta">Pasta</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pap_wors" name="pap_wors" {% if request.form and request.form.pap_wors %}checked{% endif %}>
+                            <label for="pap_wors">Pap and Wors</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="other" name="other">
+                            <label for="other">Other:</label>
+                            <input type="text" name="other_food" value="{{ request.form.other_food if request.form }}" style="margin-left: 10px; flex-grow: 1;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h2>Please rate your level of agreement</h2>
+                    <p>1 = Strongly Agree, 5 = Strongly Disagree</p>
+                    
+                    <table class="rating-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>I like to watch movies</td>
+                                {% for i in range(1,6) %}
+                                <td><input type="radio" name="movies_rating" value="{{ i }}" {% if request.form and request.form.movies_rating == i|string %}checked{% endif %} required></td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td>I like to listen to radio</td>
+                                {% for i in range(1,6) %}
+                                <td><input type="radio" name="radio_rating" value="{{ i }}" {% if request.form and request.form.radio_rating == i|string %}checked{% endif %} required></td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td>I like to eat out</td>
+                                {% for i in range(1,6) %}
+                                <td><input type="radio" name="eat_out_rating" value="{{ i }}" {% if request.form and request.form.eat_out_rating == i|string %}checked{% endif %} required></td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td>I like to watch TV</td>
+                                {% for i in range(1,6) %}
+                                <td><input type="radio" name="tv_rating" value="{{ i }}" {% if request.form and request.form.tv_rating == i|string %}checked{% endif %} required></td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <button type="submit" class="submit-btn">SUBMIT SURVEY</button>
+            </form>
+        </div>
+        
+        <div class="nav-links">
+            <a href="{{ url_for('results') }}" class="nav-link">View Survey Results</a>
+        </div>
+    </div>
+</body>
+</html>
